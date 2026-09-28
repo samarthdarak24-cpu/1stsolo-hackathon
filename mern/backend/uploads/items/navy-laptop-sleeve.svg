@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="navy laptop sleeve">
+  <title>navy laptop sleeve</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#d7dcea"/>
+      <stop offset="100%" stop-color="#a5b0d0"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#6275ad"/>
+      <stop offset="55%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#172d6c"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <ellipse cx="400" cy="516" rx="196" ry="26" fill="#0f172a" opacity="0.13"/>
+  
+    <g filter="url(#sh)">
+      <path d="M244 168h312c18 0 32 14 32 32v208H212V200c0-18 14-32 32-32z" fill="#1e3a8a"/>
+      <path d="M240 196h320v184H240z" fill="#14265b"/>
+      <path d="M262 218h276v140H262z" fill="#2563eb" opacity="0.75"/>
+      <path d="M186 408h428l26 52c4 9-3 18-13 18H173c-10 0-17-9-13-18z" fill="#193071"/>
+      <rect x="356" y="424" width="88" height="10" rx="5" fill="#122353" opacity="0.6"/>
+    </g>
+    <path d="M262 218h276v140H262z" fill="#ffffff" opacity="0.12"/>
+</svg>

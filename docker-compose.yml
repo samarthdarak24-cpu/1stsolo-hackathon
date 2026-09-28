@@ -1,0 +1,59 @@
+# Production-path infrastructure, on demand.
+#
+# Nothing here is required to run LostLink AI. The default clone-and-run uses
+# MongoDB (if present) or the in-memory store, Qdrant's local on-disk engine, and
+# the in-process journalled queue — no containers at all. This file exists for
+# the step AFTER that: the two services the app already knows how to use when
+# they are present.
+#
+#   docker compose up -d              # Qdrant + Redis
+#   mern/backend/.env:  REDIS_URL=redis://127.0.0.1:6379
+#   ai-service/.env:    QDRANT_URL=http://127.0.0.1:6333
+#
+# Both integrations are already implemented and pick themselves up from the
+# environment, so there is nothing to switch in code:
+#   * REDIS_URL  -> aiQueue uses BullMQ instead of the in-process queue, so
+#                   match jobs survive a restart without the journal file.
+#   * QDRANT_URL -> the vector store's tier 1, replacing the local engine.
+#
+# Volumes are named and persisted; `docker compose down` keeps them, `down -v`
+# removes the vectors and the Redis state with them.
+
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.15.1
+    container_name: lostlink-qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333" # REST, what the AI service calls
+      - "6334:6334" # gRPC
+    volumes:
+      - qdrant-data:/qdrant/storage
+    healthcheck:
+      # The AI service falls back to its local engine if this is unhealthy, so a
+      # slow start is not fatal - but a failing check is worth seeing.
+      test: ["CMD-SHELL", "bash -c ':> /dev/tcp/127.0.0.1/6333' || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  redis:
+    image: redis:7.4-alpine
+    container_name: lostlink-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    # appendonly keeps queued match jobs across a container restart, which is the
+    # whole reason to run Redis instead of the in-process queue.
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  qdrant-data:
+  redis-data:

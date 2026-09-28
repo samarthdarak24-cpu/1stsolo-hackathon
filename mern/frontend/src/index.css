@@ -1,0 +1,216 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans text-slate-600 antialiased;
+    background-color: #f7f9fb;
+    /* Tabular figures stop metric tiles jittering as values change. */
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'tnum';
+  }
+  /* Headings carry the navy ink; everything else stays quiet so the navy reads
+     as hierarchy rather than as another colour in the palette. */
+  h1, h2, h3, h4 { @apply text-brand-ink; text-wrap: balance; }
+  h1 { @apply text-2xl font-extrabold leading-tight tracking-tight; }
+  h2 { @apply text-lg font-bold leading-snug tracking-tight; }
+  h3 { @apply text-base font-bold leading-snug; }
+  h4 { @apply text-sm font-bold leading-snug; }
+  p { text-wrap: pretty; }
+  ::selection { @apply bg-brand-100 text-brand-900; }
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500/60 ring-offset-2 ring-offset-white;
+  }
+  * { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
+  *::-webkit-scrollbar { width: 8px; height: 8px; }
+  *::-webkit-scrollbar-thumb { @apply rounded-full bg-slate-300/80; }
+  *::-webkit-scrollbar-thumb:hover { @apply bg-slate-400; }
+  *::-webkit-scrollbar-track { background: transparent; }
+}
+
+@layer components {
+  /* ---- ambient background --------------------------------------------
+     One very quiet teal wash behind the shell. Deliberately far weaker than
+     the previous revision: the content has to dominate the decoration. */
+  .app-surface { position: relative; background-color: #f7f9fb; isolation: isolate; }
+  .app-surface::before {
+    content: '';
+    position: fixed;
+    inset: -20% -10% auto -10%;
+    height: 60vh;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(44rem 24rem at 14% 0%, rgba(20, 184, 166, .07), transparent 62%);
+  }
+
+  /* Standalone background for full-bleed states (auth, 404, loading).
+     Previous revisions referenced a class named `auth-gradient` that no longer
+     existed, which left the login screen on a bare white page. */
+  .auth-surface {
+    position: relative;
+    background:
+      radial-gradient(48rem 30rem at 12% 0%, rgba(20, 184, 166, .12), transparent 60%),
+      /* Second wash is teal too, just offset — a blue wash here is what made
+         the login page read blue. */
+      radial-gradient(40rem 26rem at 88% 6%, rgba(13, 148, 136, .10), transparent 62%),
+      #f7f9fb;
+  }
+  .dot-pattern {
+    background-color: #f7f9fb;
+    background-image: radial-gradient(rgba(15, 23, 42, .06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* ---- surfaces: ELEVATION OVER BORDERS --------------------------------
+     A resting surface is white + soft shadow and carries NO border. A border
+     appears only on hover, on inputs, and where a divider is required. */
+  .card-surface { @apply rounded-2xl bg-white shadow-soft; }
+  .surface { @apply rounded-2xl bg-white shadow-soft; }
+
+  .card-interactive {
+    @apply rounded-2xl bg-white shadow-soft
+           transition-all duration-200 ease-spring
+           hover:-translate-y-0.5 hover:shadow-lift hover:ring-1 hover:ring-slate-900/5
+           focus-visible:-translate-y-0.5 focus-visible:shadow-lift;
+  }
+
+  /* A quiet inset panel for tier-3/4 detail inside a surface — replaces the
+     "a card inside a card inside a card" stacking that made dense screens
+     unreadable. */
+  .panel { @apply rounded-xl bg-slate-50/80; }
+  .panel-quiet { @apply rounded-xl bg-slate-50/60; }
+
+  /* ---- table density --------------------------------------------------- */
+  .table-shell { @apply overflow-hidden rounded-2xl bg-white shadow-soft; }
+  .table-head { @apply sticky top-0 z-10 bg-slate-50/95 backdrop-blur-sm; }
+  .table-row { @apply border-t border-slate-100 transition-colors hover:bg-brand-50/40; }
+  .th { @apply whitespace-nowrap px-4 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-slate-500; }
+  .td { @apply px-4 py-3 align-middle text-sm text-slate-700; }
+
+  /* ---- skeletons ------------------------------------------------------- */
+  .skeleton { @apply relative overflow-hidden rounded-lg bg-slate-200/70; }
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full animate-shimmer;
+    background-image: linear-gradient(90deg, transparent, rgba(255, 255, 255, .7), transparent);
+  }
+
+  .scrollbar-thin { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
+  .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { @apply rounded-full bg-slate-300; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+
+  /* ---- form primitives --------------------------------------------------
+     Inputs and selects are the ONE place a border belongs: they need a visible
+     edge to read as fillable. Every screen uses these so field rhythm and
+     focus treatment are identical everywhere. */
+  .field-label { @apply mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-slate-500; }
+  .field-hint { @apply mt-1.5 text-xs leading-relaxed text-slate-400; }
+  .field-error { @apply mt-1.5 text-xs font-semibold text-red-600; }
+  .input-base {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800
+           shadow-xs transition placeholder:text-slate-400
+           focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-100
+           disabled:bg-slate-50 disabled:text-slate-500;
+  }
+  .select-base {
+    @apply w-full cursor-pointer appearance-none rounded-xl border border-slate-200 bg-white
+           px-3.5 py-2.5 pr-9 text-sm text-slate-800 shadow-xs transition
+           focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-100
+           disabled:bg-slate-50 disabled:text-slate-500;
+  }
+  .textarea-base {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm leading-relaxed
+           text-slate-800 shadow-xs transition placeholder:text-slate-400
+           focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-100
+           disabled:bg-slate-50 disabled:text-slate-500;
+  }
+
+  /* ---- section rhythm --------------------------------------------------
+     One place decides how far apart blocks sit, so pages stop inventing
+     their own vertical spacing. */
+  .stack-section { @apply space-y-6; }
+  .stack-tight { @apply space-y-3; }
+}
+
+@layer utilities {
+  .gradient-text { @apply bg-gradient-to-r from-brand-700 to-accent-500 bg-clip-text text-transparent; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Staggered entrance: a grid or list animates in sequence rather than all
+     at once, which reads as considered rather than mechanical. */
+  .stagger > * { animation: fade-up .42s cubic-bezier(.22,1,.36,1) both; }
+  .stagger > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger > *:nth-child(2) { animation-delay: 40ms; }
+  .stagger > *:nth-child(3) { animation-delay: 80ms; }
+  .stagger > *:nth-child(4) { animation-delay: 120ms; }
+  .stagger > *:nth-child(5) { animation-delay: 160ms; }
+  .stagger > *:nth-child(6) { animation-delay: 200ms; }
+  .stagger > *:nth-child(7) { animation-delay: 240ms; }
+  .stagger > *:nth-child(8) { animation-delay: 280ms; }
+  .stagger > *:nth-child(n+9) { animation-delay: 320ms; }
+
+  /* Dense feeds (notifications, audit rows, a 20-item table) use shorter steps
+     and less travel: at 40ms a long list is still arriving a second later,
+     which reads as sluggish rather than considered. */
+  .stagger-fast > * { animation: fade-up .3s cubic-bezier(.22,1,.36,1) both; }
+  .stagger-fast > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger-fast > *:nth-child(2) { animation-delay: 24ms; }
+  .stagger-fast > *:nth-child(3) { animation-delay: 48ms; }
+  .stagger-fast > *:nth-child(4) { animation-delay: 72ms; }
+  .stagger-fast > *:nth-child(5) { animation-delay: 96ms; }
+  .stagger-fast > *:nth-child(6) { animation-delay: 120ms; }
+  .stagger-fast > *:nth-child(7) { animation-delay: 144ms; }
+  .stagger-fast > *:nth-child(8) { animation-delay: 168ms; }
+  .stagger-fast > *:nth-child(9) { animation-delay: 192ms; }
+  .stagger-fast > *:nth-child(10) { animation-delay: 216ms; }
+  .stagger-fast > *:nth-child(n+11) { animation-delay: 240ms; }
+
+  /* Tap feedback for interactive surfaces that are not <Button> — category
+     tiles, nav rows, selectable cards. 3% is enough to feel, small enough that
+     a mis-tap is not read as navigation. */
+  .tappable { @apply transition-transform duration-150 ease-spring active:scale-[.97]; }
+
+  /* Hover lift for marketing/empty-state cards that predate Card
+     tone="interactive" — the same one motion the product cards use. */
+  .hover-raise {
+    @apply transition-all duration-200 ease-spring
+           hover:-translate-y-1 hover:shadow-card;
+  }
+
+  /* Safe-area padding for the mobile bottom bar on notched devices. */
+  .pb-safe { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.5rem); }
+
+  /* ---- scroll-triggered reveal (marketing surfaces) --------------------
+     The landing page is ~15 sections long; fading every one of them in at
+     load means the visitor never sees the animation at all. Where the browser
+     supports scroll-driven animations the reveal is tied to the viewport
+     instead. Older engines keep the plain on-load fade, which is harmless. */
+  .reveal-scroll { animation: fade-up .6s cubic-bezier(.22,1,.36,1) both; }
+  @supports (animation-timeline: view()) {
+    .reveal-scroll,
+    .landing-flow > section {
+      animation: fade-up .6s cubic-bezier(.22,1,.36,1) both;
+      animation-timeline: view();
+      /* Completes ~35% into the element's entry, which for a tall marketing
+         section is still in the lower half of the screen — the visitor never
+         catches a headline sitting at half opacity. */
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

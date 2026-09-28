@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="leather wallet">
+  <title>leather wallet</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#eae2da"/>
+      <stop offset="100%" stop-color="#d1bfae"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#ae8e71"/>
+      <stop offset="55%" stop-color="#8b5e34"/>
+      <stop offset="100%" stop-color="#6c4929"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <ellipse cx="400" cy="516" rx="196" ry="26" fill="#0f172a" opacity="0.13"/>
+  
+    <g filter="url(#sh)">
+      <path d="M250 244c0-22 18-40 40-40h180c22 0 40 18 40 40v192c0 22-18 40-40 40H290c-22 0-40-18-40-40z" fill="url(#body)"/>
+      <path d="M470 300h40c14 0 24 11 24 25v46c0 14-10 25-24 25h-40z" fill="#674626"/>
+      <path d="M250 300h220" stroke="#53381f" stroke-width="4" opacity="0.5"/>
+      <path d="M300 300c0-32 26-58 58-58h54" fill="none" stroke="#4c341d" stroke-width="7" opacity="0.55" stroke-dasharray="12 10"/>
+    </g>
+    <path d="M268 226h180c16 0 28 12 28 28v20H240v-20c0-16 12-28 28-28z" fill="#ffffff" opacity="0.12"/>
+</svg>

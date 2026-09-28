@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="grey glasses case">
+  <title>grey glasses case</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#eaecef"/>
+      <stop offset="100%" stop-color="#d0d4db"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#adb4c1"/>
+      <stop offset="55%" stop-color="#8a94a6"/>
+      <stop offset="100%" stop-color="#6c7381"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <ellipse cx="400" cy="516" rx="196" ry="26" fill="#0f172a" opacity="0.13"/>
+  
+    <g filter="url(#sh)">
+      <rect x="212" y="248" width="376" height="176" rx="52" fill="url(#body)"/>
+      <path d="M212 336h376" stroke="#5a606c" stroke-width="6" opacity="0.55"/>
+      <circle cx="400" cy="300" r="15" fill="#22262b"/>
+      <path d="M212 300a52 52 0 0 1 52-52h272a52 52 0 0 1 52 52v36H212z" fill="#ffffff" opacity="0.13"/>
+      <rect x="262" y="356" width="120" height="10" rx="5" fill="#ffffff" opacity="0.3"/>
+    </g>
+</svg>

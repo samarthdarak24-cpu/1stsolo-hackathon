@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="teal water bottle">
+  <title>teal water bottle</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#d3ecea"/>
+      <stop offset="100%" stop-color="#9ed4cf"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#56b4ac"/>
+      <stop offset="55%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#0a736a"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <ellipse cx="400" cy="516" rx="196" ry="26" fill="#0f172a" opacity="0.13"/>
+  
+    <g filter="url(#sh)">
+      <rect x="360" y="96" width="80" height="60" rx="14" fill="#09685f"/>
+      <path d="M352 150h96c26 0 46 20 46 46v246c0 30-24 54-54 54h-80c-30 0-54-24-54-54V196c0-26 20-46 46-46z" fill="url(#body)"/>
+      <rect x="318" y="262" width="164" height="34" rx="10" fill="#f1f5f9" opacity="0.85"/>
+      <path d="M344 400h112" stroke="#086058" stroke-width="6" opacity="0.4" stroke-linecap="round"/>
+    </g>
+    <ellipse cx="346" cy="240" rx="15" ry="72" fill="#ffffff" opacity="0.22"/>
+</svg>

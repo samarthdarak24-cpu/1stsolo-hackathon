@@ -1,0 +1,25 @@
+# Optional heavy inference stack.
+# Install with:  pip install -r requirements-ml.txt
+#
+# Every model here is loaded LAZILY and INDEPENDENTLY by app/providers/*.py.
+# The service starts and serves requests even when none of these are
+# installed - each provider reports itself "unavailable" and the pipeline
+# degrades to the signals that ARE available.
+#
+# CPU-only torch on Windows:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+
+torch>=2.4.0
+torchvision>=0.19.0
+ultralytics>=8.3.0
+transformers>=4.46.0
+sentencepiece>=0.2.0
+accelerate>=0.34.0
+qdrant-client>=1.12.0
+
+# OCR. RapidOCR serves PaddleOCR's own models through onnxruntime, so this
+# pulls ~40MB instead of the ~700MB paddlepaddle wheel and works on CPU
+# everywhere. PaddleOCR itself is NOT required — app/providers/ocr.py only
+# falls back to it when rapidocr is absent.
+rapidocr>=3.9.0
+onnxruntime>=1.16.0

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="black earbuds">
+  <title>black earbuds</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#d7d8d9"/>
+      <stop offset="100%" stop-color="#a7a8aa"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#64676b"/>
+      <stop offset="55%" stop-color="#22262b"/>
+      <stop offset="100%" stop-color="#1b1e22"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <ellipse cx="400" cy="516" rx="196" ry="26" fill="#0f172a" opacity="0.13"/>
+  
+    <g filter="url(#sh)">
+      <path d="M228 336v-24c0-96 76-172 172-172s172 76 172 172v24" fill="none" stroke="#22262b" stroke-width="46" stroke-linecap="round"/>
+      <rect x="176" y="312" width="104" height="152" rx="46" fill="#181b1f"/>
+      <rect x="520" y="312" width="104" height="152" rx="46" fill="#181b1f"/>
+      <rect x="196" y="336" width="64" height="104" rx="30" fill="#2563eb" opacity="0.6"/>
+      <rect x="540" y="336" width="64" height="104" rx="30" fill="#2563eb" opacity="0.6"/>
+    </g>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="silver laptop stand">
+  <title>silver laptop stand</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#f6f7fa"/>
+      <stop offset="100%" stop-color="#eaeef3"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#dbe2ea"/>
+      <stop offset="55%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#9ea6b0"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <ellipse cx="400" cy="516" rx="196" ry="26" fill="#0f172a" opacity="0.13"/>
+  
+    <g filter="url(#sh)">
+      <path d="M212 402h376v30c0 20-16 36-36 36H248c-20 0-36-16-36-36z" fill="#8e959e"/>
+      <path d="M262 402l96-236c8-20 26-32 47-32h40c21 0 39 12 47 32l96 236z" fill="url(#body)"/>
+      <path d="M292 372l82-200c4-10 13-16 24-16h4c11 0 20 6 24 16l82 200z" fill="#868d95"/>
+      <path d="M312 350h176" stroke="#8a94a6" stroke-width="18" stroke-linecap="round"/>
+      <path d="M340 288h120" stroke="#8a94a6" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+    </g>
+    <path d="M262 402l96-236c8-20 26-32 47-32h8c-21 0-39 12-47 32l-96 236z" fill="#ffffff" opacity="0.14"/>
+</svg>

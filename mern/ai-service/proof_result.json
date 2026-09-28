@@ -1,0 +1,188 @@
+{
+  "checks": [
+    {
+      "label": "SigLIP2 embedding stored for every image",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "label": "BGE-M3 embedding stored for every text",
+      "ok": true,
+      "detail": "3/3"
+    },
+    {
+      "label": "query image embedded",
+      "ok": true,
+      "detail": "dim=768"
+    },
+    {
+      "label": "org A search returns only org A vectors",
+      "ok": true,
+      "detail": "got ['A-bike', 'A-found-bag']"
+    },
+    {
+      "label": "org B search returns only org B vectors",
+      "ok": true,
+      "detail": "got ['B-found-bag']"
+    },
+    {
+      "label": "NO cross-organization leakage",
+      "ok": true,
+      "detail": "org A cannot see org B's backpack"
+    },
+    {
+      "label": "correct nearest candidate ranked first",
+      "ok": true,
+      "detail": "top=A-found-bag cos=0.9998"
+    },
+    {
+      "label": "neither model signal degraded (visual + semantic both contributed)",
+      "ok": true,
+      "detail": "degraded=['location']"
+    },
+    {
+      "label": "real models recorded in the version string",
+      "ok": true,
+      "detail": "siglip:bge-m3:reranker:store:qdrant-local"
+    },
+    {
+      "label": "candidates returned",
+      "ok": true,
+      "detail": "n=2"
+    },
+    {
+      "label": "top candidate is the backpack, not the bicycle",
+      "ok": true,
+      "detail": "A-found-bag"
+    },
+    {
+      "label": "visual + semantic evidence rows are model-backed",
+      "ok": true,
+      "detail": "model_backed=['semantic', 'visual']"
+    },
+    {
+      "label": "deterministic rows are not mislabelled as model_backed",
+      "ok": true,
+      "detail": "mislabelled=[]"
+    },
+    {
+      "label": "visual signal is a real SigLIP2 cosine",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "label": "semantic signal is a real BGE-M3 cosine",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "label": "reranker actually ran",
+      "ok": true,
+      "detail": "rerank=0.6675"
+    },
+    {
+      "label": "final score is reproducible from stored evidence",
+      "ok": true,
+      "detail": "delta=0.10"
+    },
+    {
+      "label": "explanation is present",
+      "ok": true,
+      "detail": "408 chars"
+    },
+    {
+      "label": "explanation refuses to claim proof of ownership",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "label": "unrelated item scores well below the real match",
+      "ok": true,
+      "detail": "gap=28.1"
+    }
+  ],
+  "top": {
+    "final_score": 90.1,
+    "band": "high",
+    "evidence": [
+      {
+        "signal": "visual",
+        "label": "Visual Similarity",
+        "score": 100.0,
+        "weight": 0.35,
+        "contribution": 35.0,
+        "detail": "SigLIP2 image embedding similarity",
+        "model_backed": true
+      },
+      {
+        "signal": "semantic",
+        "label": "Semantic Similarity",
+        "score": 88.6,
+        "weight": 0.2,
+        "contribution": 17.7,
+        "detail": "BGE-M3 description embedding similarity",
+        "model_backed": true
+      },
+      {
+        "signal": "attributes",
+        "label": "Attribute Match",
+        "score": 100.0,
+        "weight": 0.15,
+        "contribution": 15.0,
+        "detail": "Matching: category, primaryColor, brand",
+        "model_backed": false
+      },
+      {
+        "signal": "time",
+        "label": "Time Proximity",
+        "score": 100.0,
+        "weight": 0.1,
+        "contribution": 10.0,
+        "detail": "Within an hour of each other",
+        "model_backed": false
+      },
+      {
+        "signal": "context",
+        "label": "Context Match",
+        "score": 79.7,
+        "weight": 0.1,
+        "contribution": 8.0,
+        "detail": "Same category (backpack)",
+        "model_backed": false
+      },
+      {
+        "signal": "location",
+        "label": "Location Proximity",
+        "score": 44.7,
+        "weight": 0.1,
+        "contribution": 4.5,
+        "detail": "Same building or area (from location text)",
+        "model_backed": false
+      }
+    ],
+    "serial_decisive": false,
+    "consistency": {
+      "score": 88.6,
+      "level": "consistent",
+      "spread": 11.4,
+      "checked": {
+        "visual": 100.0,
+        "semantic": 88.6,
+        "attributes": 100.0
+      },
+      "contradictions": [],
+      "review_required": false
+    },
+    "flags": [],
+    "report_id": "A-found-bag",
+    "report_type": "FOUND",
+    "reference": "",
+    "location": "Central Library",
+    "category": "Backpack",
+    "relevant_date": "2026-09-28T09:50:13Z",
+    "retrieval_score": 0.9998,
+    "rerank_score": 0.6675,
+    "explanation": "Candidate match with Backpack at high confidence.\n- Visual Similarity: 100% (SigLIP2 image embedding similarity)\n- Semantic Similarity: 89% (BGE-M3 description embedding similarity)\n- Attribute Match: 100% (Matching: category, primaryColor, brand)\nReported location: Central Library, 2nd Floor (lost) vs Central Library (found).\nA match is a candidate recommendation for human review, not proof of ownership."
+  },
+  "run_seconds": 18.9
+}

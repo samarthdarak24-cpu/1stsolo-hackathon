@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="green umbrella">
+  <title>green umbrella</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#d5eede"/>
+      <stop offset="100%" stop-color="#a2dab7"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#5cbf80"/>
+      <stop offset="55%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#117f3a"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <ellipse cx="400" cy="516" rx="196" ry="26" fill="#0f172a" opacity="0.13"/>
+  
+    <g filter="url(#sh)">
+      <path d="M400 132c-118 0-206 76-224 174h448c-18-98-106-174-224-174z" fill="url(#body)"/>
+      <path d="M400 132c-52 0-96 68-108 174h216c-12-106-56-174-108-174z" fill="#f1f5f9" opacity="0.55"/>
+      <path d="M176 306h448" stroke="#0d622c" stroke-width="7"/>
+      <rect x="388" y="306" width="24" height="152" rx="10" fill="#0f7234"/>
+      <path d="M412 458c0 34-26 48-48 40" fill="none" stroke="#f1f5f9" stroke-width="16" stroke-linecap="round"/>
+    </g>
+    <path d="M400 132c-118 0-206 76-224 174h224z" fill="#ffffff" opacity="0.13"/>
+</svg>

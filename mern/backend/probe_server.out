@@ -1,0 +1,9 @@
+[store] DATA_MODE=memory — using in-memory store.
+[seed] empty database detected — creating demo data
+[seed] demo data created: 5 orgs, 18 users, 24 reports, 13 matches, 5 verifications, 5 returns, 12 custody records, 2 CCTV evidence sets, notifications + audit logs
+[aiQueue] REDIS_URL not set - using the in-process queue.
+[aiWorker] handling "match:report" on the in-process queue.
+[queue] in-process · AI service: http://127.0.0.1:8100
+[LostLink AI] API on http://localhost:5063 (store: memory)
+[aiWorker] LL-0699A8: 0 heuristic match(es) (inference service unavailable)
+[aiWorker] LL-0C4B8F: 1 heuristic match(es) (inference service unavailable)

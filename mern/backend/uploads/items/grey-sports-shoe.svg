@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="grey sports shoe">
+  <title>grey sports shoe</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#eaecef"/>
+      <stop offset="100%" stop-color="#d0d4db"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#adb4c1"/>
+      <stop offset="55%" stop-color="#8a94a6"/>
+      <stop offset="100%" stop-color="#6c7381"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <ellipse cx="400" cy="516" rx="196" ry="26" fill="#0f172a" opacity="0.13"/>
+  
+    <g filter="url(#sh)">
+      <path d="M170 400c0-26 20-46 46-48l84-8 62-96c10-16 28-26 46-26h44c26 0 48 18 52 44l10 62c22 8 40 28 42 52 2 24-16 44-40 44H212c-24 0-42-12-42-24z" fill="url(#body)"/>
+      <path d="M170 400h338c24 0 42 12 42 26 0 12-10 20-24 20H204c-20 0-34-8-34-20z" fill="#ffffff"/>
+      <path d="M300 344l58-92c10-16 28-26 46-26h44c26 0 48 18 52 44l6 40z" fill="#f1f5f9" opacity="0.4"/>
+      <g stroke="#4c515b" stroke-width="9" stroke-linecap="round">
+        <path d="M338 316h88"/><path d="M356 282h88"/><path d="M382 250h80"/>
+      </g>
+    </g>
+</svg>

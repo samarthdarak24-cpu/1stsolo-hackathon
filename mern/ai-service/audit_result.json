@@ -1,0 +1,84 @@
+{
+  "YOLO": {
+    "ok": true,
+    "checkpoint": "yolo26n.pt",
+    "load_s": 0.3,
+    "infer_s": 4.41,
+    "test_image": "t.jpg",
+    "image_size": [
+      480,
+      360
+    ],
+    "detections": 1,
+    "top3": [
+      {
+        "label": "tv",
+        "conf": 0.268
+      }
+    ],
+    "coco_classes": 80
+  },
+  "SigLIP2": {
+    "ok": true,
+    "checkpoint": "google/siglip2-base-patch16-224",
+    "load_s": 16.44,
+    "infer_s": 0.36,
+    "dim": 768,
+    "l2_norm": 1.0,
+    "self_cosine_same_image": 1.0,
+    "first8": [
+      -0.0057,
+      -0.0143,
+      -0.0092,
+      -0.0197,
+      0.0056,
+      0.0206,
+      -0.026,
+      -0.0037
+    ]
+  },
+  "BGE-M3": {
+    "ok": true,
+    "checkpoint": "BAAI/bge-m3",
+    "load_s": 5.39,
+    "infer_s": 3.39,
+    "dim": 1024,
+    "config_hidden_size": 1024,
+    "related_cos": 0.5392,
+    "unrelated_cos": 0.4415,
+    "verdict": "PASS related>unrelated"
+  },
+  "Reranker": {
+    "ok": true,
+    "checkpoint": "BAAI/bge-reranker-v2-m3",
+    "load_s": 23.69,
+    "infer_s": 2.82,
+    "scores": [
+      1.0,
+      0.0
+    ],
+    "verdict": "PASS relevant>irrelevant"
+  },
+  "OCR": {
+    "ok": true,
+    "checkpoint": "rapidocr:en",
+    "load_s": 58.42,
+    "infer_s": 1.23,
+    "text": "Wildcraft MODEL ALN-7734B",
+    "serials": [
+      "ALN-7734B"
+    ],
+    "avg_confidence": 0.9956
+  },
+  "Qdrant": {
+    "ok": false,
+    "mode": "in-memory",
+    "url": "http://localhost:6333"
+  },
+  "Qwen3-VL": {
+    "ok": false,
+    "configured": false,
+    "base_url": "(unset)",
+    "note": "external OpenAI-compatible endpoint, not bundled"
+  }
+}

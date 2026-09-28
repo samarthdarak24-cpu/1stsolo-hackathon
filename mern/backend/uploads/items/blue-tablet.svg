@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="blue tablet">
+  <title>blue tablet</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#d8e3fb"/>
+      <stop offset="100%" stop-color="#a8c1f7"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#6692f1"/>
+      <stop offset="55%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4db7"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <ellipse cx="400" cy="516" rx="196" ry="26" fill="#0f172a" opacity="0.13"/>
+  
+    <g filter="url(#sh)">
+      <rect x="228" y="150" width="344" height="300" rx="34" fill="#1a45a5"/>
+      <rect x="252" y="176" width="296" height="248" rx="20" fill="#f1f5f9"/>
+      <path d="M300 250h200M300 292h200M300 334h120" stroke="#ffffff" stroke-width="14" stroke-linecap="round" opacity="0.55"/>
+      <circle cx="400" cy="440" r="9" fill="#ffffff" opacity="0.45"/>
+    </g>
+    <rect x="252" y="176" width="296" height="248" rx="20" fill="#ffffff" opacity="0.09"/>
+</svg>

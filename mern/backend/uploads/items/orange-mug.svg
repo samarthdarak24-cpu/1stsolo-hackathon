@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="orange mug">
+  <title>orange mug</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#fbe1d3"/>
+      <stop offset="100%" stop-color="#f7bc9e"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#f08a55"/>
+      <stop offset="55%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#b74509"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <ellipse cx="400" cy="516" rx="196" ry="26" fill="#0f172a" opacity="0.13"/>
+  
+    <g filter="url(#sh)">
+      <path d="M498 232h42c30 0 54 24 54 54v34c0 30-24 54-54 54h-42z" fill="none" stroke="#983908" stroke-width="26"/>
+      <path d="M258 212h250c18 0 32 14 32 32v186c0 34-28 62-62 62H288c-34 0-62-28-62-62V244c0-18 14-32 32-32z" fill="url(#body)"/>
+      <ellipse cx="383" cy="212" rx="125" ry="26" fill="#ef8249"/>
+      <ellipse cx="383" cy="212" rx="96" ry="16" fill="#f1f5f9" opacity="0.7"/>
+      <path d="M300 320h166" stroke="#ffffff" stroke-width="12" stroke-linecap="round" opacity="0.35"/>
+    </g>
+    <path d="M268 300v120c0 20 16 36 36 36h-16c-34 0-62-28-62-62V244c0-18 14-32 32-32h10z" fill="#ffffff" opacity="0.12"/>
+</svg>

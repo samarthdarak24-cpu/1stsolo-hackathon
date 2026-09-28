@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="silver watch">
+  <title>silver watch</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#f6f7fa"/>
+      <stop offset="100%" stop-color="#eaeef3"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#dbe2ea"/>
+      <stop offset="55%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#9ea6b0"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <ellipse cx="400" cy="516" rx="196" ry="26" fill="#0f172a" opacity="0.13"/>
+  
+    <g filter="url(#sh)">
+      <rect x="352" y="120" width="96" height="150" rx="30" fill="#848a92"/>
+      <rect x="352" y="330" width="96" height="150" rx="30" fill="#848a92"/>
+      <circle cx="400" cy="300" r="118" fill="url(#body)"/>
+      <circle cx="400" cy="300" r="94" fill="#848a92"/>
+      <path d="M400 300l58-40" stroke="#16a34a" stroke-width="12" stroke-linecap="round"/>
+      <path d="M400 300v-58" stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity="0.75"/>
+      <circle cx="400" cy="300" r="9" fill="#ffffff"/>
+      <circle cx="400" cy="156" r="13" fill="#16a34a"/>
+    </g>
+    <ellipse cx="352" cy="240" rx="16" ry="60" fill="#ffffff" opacity="0.16"/>
+</svg>

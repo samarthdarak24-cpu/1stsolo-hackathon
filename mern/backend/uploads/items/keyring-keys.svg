@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="keyring keys">
+  <title>keyring keys</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#f6f7fa"/>
+      <stop offset="100%" stop-color="#eaeef3"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#dbe2ea"/>
+      <stop offset="55%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#9ea6b0"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <ellipse cx="400" cy="516" rx="196" ry="26" fill="#0f172a" opacity="0.13"/>
+  
+    <g filter="url(#sh)">
+      <circle cx="330" cy="286" r="76" fill="none" stroke="#dc2626" stroke-width="20"/>
+      <rect x="366" y="272" width="204" height="28" rx="14" fill="#cbd5e1"/>
+      <rect x="510" y="272" width="26" height="66" rx="10" fill="#cbd5e1"/>
+      <rect x="556" y="272" width="26" height="52" rx="10" fill="#cbd5e1"/>
+      <path d="M430 300v34" stroke="#cbd5e1" stroke-width="22" stroke-linecap="round"/>
+      <path d="M476 300v30" stroke="#cbd5e1" stroke-width="22" stroke-linecap="round"/>
+    </g>
+    <rect x="366" y="272" width="204" height="10" rx="5" fill="#ffffff" opacity="0.28"/>
+</svg>

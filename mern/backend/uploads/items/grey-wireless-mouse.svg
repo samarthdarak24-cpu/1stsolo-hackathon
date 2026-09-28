@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="grey wireless mouse">
+  <title>grey wireless mouse</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#eaecef"/>
+      <stop offset="100%" stop-color="#d0d4db"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#adb4c1"/>
+      <stop offset="55%" stop-color="#8a94a6"/>
+      <stop offset="100%" stop-color="#6c7381"/>
+    </linearGradient>
+    <filter id="sh" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <ellipse cx="400" cy="516" rx="196" ry="26" fill="#0f172a" opacity="0.13"/>
+  
+    <g filter="url(#sh)">
+      <path d="M400 140c66 0 118 52 118 118v128c0 66-52 118-118 118s-118-52-118-118V258c0-66 52-118 118-118z" fill="url(#body)"/>
+      <path d="M400 140c-66 0-118 52-118 118v40h236v-40c0-66-52-118-118-118z" fill="#6c7381"/>
+      <rect x="386" y="168" width="28" height="76" rx="14" fill="#2563eb"/>
+      <path d="M282 300h236" stroke="#5a606c" stroke-width="6" opacity="0.5"/>
+    </g>
+    <ellipse cx="352" cy="330" rx="22" ry="80" fill="#ffffff" opacity="0.14"/>
+</svg>

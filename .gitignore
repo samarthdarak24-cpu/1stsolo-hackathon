@@ -1,0 +1,58 @@
+# Dependencies
+node_modules/
+# Dependencies
+node_modules/
+*.venv/
+__pycache__/
+*.pyc
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+*.log
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Local database runtime files
+mern/ai-service/storage/qdrant-local/
+
+# Cloned reference repos (reading material — never shipped, never vendored)
+# See docs/github-repos-by-feature.md for which ones are safe to copy.
+reference/
+
+
+# Sensitive files (auto-detected)
+ai-run.err.log
+ai-run.log
+backend-boot.log
+backend-run.err.log
+backend-run.log
+backend.err.log
+backend.log
+dbg.err.log
+dbg.log
+frontend-run.err.log
+frontend-run.log
+frontend.log
+

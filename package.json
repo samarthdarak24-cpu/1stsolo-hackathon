@@ -1,0 +1,18 @@
+{
+  "name": "lostlink-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LostLink AI - AI-assisted lost and found for schools, campuses and companies. Monorepo root: convenience scripts only, no runtime dependencies.",
+  "scripts": {
+    "start": "node scripts/start-all.js",
+    "test": "node scripts/test-all.js",
+    "test:list": "node scripts/test-all.js --list",
+    "test:vector": "node scripts/test-all.js --only vector --with-vector",
+    "test:routes": "node scripts/test-all.js --only route",
+    "reset": "npm --prefix mern/backend run reset",
+    "install:all": "npm --prefix mern/backend install && npm --prefix mern/frontend install"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
