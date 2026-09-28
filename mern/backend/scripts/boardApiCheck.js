@@ -65,7 +65,7 @@ async function waitUp() {
 }
 
 (async () => {
-  const server = startServer();
+  const server = EXTERNAL ? null : startServer();
   try {
     check('server booted', await waitUp());
 
