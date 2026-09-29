@@ -7,6 +7,14 @@
  */
 const TOKEN_KEY = 'lostlink_token';
 const USER_KEY = 'lostlink_user';
+const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+
+const resolveUrl = (path) => {
+  if (!path) return path;
+  if (/^https?:\/\//i.test(path)) return path;
+  const base = API_BASE || '';
+  return `${base}${path}`;
+};
 
 export class ApiError extends Error {
   constructor(message, status, details) {
@@ -50,8 +58,10 @@ async function request(path, { method = 'GET', body, auth = true, signal, isForm
   }
 
   let res;
+  const url = resolveUrl(path);
+
   try {
-    res = await fetch(path, {
+    res = await fetch(url, {
       method,
       headers,
       signal,

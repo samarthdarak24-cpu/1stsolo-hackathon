@@ -1,0 +1,49 @@
+services:
+  - type: web
+    name: lostlink-backend
+    env: node
+    rootDir: mern/backend
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: CLIENT_URL
+        value: https://your-frontend-domain.com
+      - key: AI_SERVICE_URL
+        value: https://your-ai-service-domain.com
+      - key: AI_ENABLED
+        value: true
+      - key: DATA_MODE
+        value: auto
+      - key: MAIL_DRIVER
+        value: off
+
+  - type: web
+    name: lostlink-ai
+    env: python
+    rootDir: mern/ai-service
+    plan: free
+    buildCommand: pip install -r requirements-core.txt -r requirements-ml.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 8100
+    envVars:
+      - key: VLM_BASE_URL
+        sync: false
+
+  - type: static
+    name: lostlink-frontend
+    rootDir: mern/frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://your-backend-domain.com/api
