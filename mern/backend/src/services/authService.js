@@ -67,7 +67,7 @@ async function checkDomain(emailAddress) {
   return {
     isFree: free,
     domain,
-    organization: org ? { id: org.id, name: org.name, type: org.type, inviteCode: org.inviteCode, location: org.location } : null,
+    organization: org ? { id: org.id, name: org.name, type: org.type, location: org.location } : null,
     requiresCode: Boolean(org) && free
   };
 }
@@ -142,7 +142,7 @@ async function forgotPassword(emailAddress) {
   const token = crypto.randomBytes(32).toString('hex');
   const expiry = new Date(Date.now() + 15 * 60 * 1000);
   await store.updateUser(user.id, { resetToken: token, resetTokenExpiry: expiry });
-  return { message: 'If an account exists, a reset link has been sent.', resetToken: token };
+  return { message: 'If an account exists, a reset link has been sent.' };
 }
 
 async function resetPassword({ token, password }) {

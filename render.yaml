@@ -18,7 +18,7 @@ services:
       - key: JWT_EXPIRES_IN
         value: 7d
       - key: CLIENT_URL
-        value: https://your-frontend-domain.com
+        value: https://onestsolo-hackathon-1frontend.onrender.com
       - key: AI_SERVICE_URL
         value: https://your-ai-service-domain.com
       - key: AI_ENABLED
