@@ -27,6 +27,8 @@ app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 // Uploaded item images are served read-only.
 app.use('/uploads', express.static(path.resolve(process.cwd(), config.uploads.dir), { maxAge: '7d' }));
 
+// Keep older frontend bundles working while they transition off the duplicated API prefix.
+app.use('/api/api/auth', authRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/organizations', orgRoutes);
 app.use('/api', apiLimiter, apiRoutes);
