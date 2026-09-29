@@ -373,9 +373,6 @@ export default function OrgMatchDetail() {
   const evidenceRows = Array.isArray(match.evidence) ? match.evidence : [];
   const chosenAction = ACTIONS.find((a) => a.key === action) || ACTIONS[0];
 
-      toast.success(res?.message || 'Review recorded');
-      setConfirming(false);
-
   return (
     <div>
       <Link
