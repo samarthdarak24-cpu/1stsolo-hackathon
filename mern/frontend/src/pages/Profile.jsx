@@ -14,7 +14,7 @@ import {
   User, Building2, ShieldCheck, KeyRound, Monitor, LogOut, Save, Copy,
   Check, AlertCircle, Mail, Phone, Camera
 } from 'lucide-react';
-import api from '../lib/api';
+import api, { resolveUrl } from '../lib/api';
 import { useProfile, useOrganizations } from '../lib/queries';
 import { useAuth } from '../context/AuthContext';
 import { useOrganization } from '../context/OrganizationContext';
@@ -106,7 +106,7 @@ function Avatar({ user, className }) {
   if (src && !broken) {
     return (
       <img
-        src={src}
+        src={resolveUrl(src)}
         alt={`${user?.name || 'User'} avatar`}
         onError={() => setBroken(true)}
         className={cn('h-20 w-20 rounded-2xl object-cover ring-4 ring-brand-50', className)}

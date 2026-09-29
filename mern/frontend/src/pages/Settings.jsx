@@ -15,7 +15,7 @@ import {
   User, Bell, Eye, ShieldCheck, Building2, Save, AlertCircle, LogOut,
   Ticket, Check, Mail, Phone, Lock, Info
 } from 'lucide-react';
-import api from '../lib/api';
+import api, { resolveUrl } from '../lib/api';
 import { useProfile } from '../lib/queries';
 import { useAuth } from '../context/AuthContext';
 import { useOrganization } from '../context/OrganizationContext';
@@ -120,7 +120,7 @@ function ProfileAvatar({ user, size = 'h-16 w-16' }) {
   if (src && !broken) {
     return (
       <img
-        src={src}
+        src={resolveUrl(src)}
         alt={`${user?.name || 'User'} avatar`}
         onError={() => setBroken(true)}
         className={cn(size, 'rounded-2xl object-cover ring-4 ring-brand-50')}

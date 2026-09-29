@@ -1,4 +1,5 @@
 import { Building2 } from 'lucide-react';
+import { resolveUrl } from '../lib/api';
 import { cn } from '../lib/cn';
 import { initialsOf } from '../lib/format';
 
@@ -34,7 +35,7 @@ export default function OrgMark({ organization, size = 'md', className }) {
       aria-hidden="true"
     >
       {url ? (
-        <img src={url} alt="" className="h-full w-full object-cover" />
+        <img src={resolveUrl(url)} alt="" className="h-full w-full object-cover" />
       ) : name ? (
         initialsOf(name)
       ) : (

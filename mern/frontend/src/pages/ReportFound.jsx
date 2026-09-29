@@ -20,7 +20,7 @@ import {
   TriangleAlert,
   Wand2
 } from 'lucide-react';
-import api from '../lib/api';
+import api, { resolveUrl } from '../lib/api';
 import { useCreateReport } from '../lib/queries';
 import { useOrganization } from '../context/OrganizationContext';
 import PageHeader from '../components/PageHeader';
@@ -268,7 +268,7 @@ function Dropzone({ dragging, onDragState, onBrowse, onFile }) {
 function ImagePreview({ src, alt, onRemove, onReplace, busy }) {
   return (
     <div className="relative overflow-hidden rounded-2xl bg-slate-50 shadow-soft">
-      <img src={src} alt={alt} className="h-64 w-full object-cover sm:h-80" />
+      <img src={resolveUrl(src)} alt={alt} className="h-64 w-full object-cover sm:h-80" />
       <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 bg-gradient-to-t from-slate-900/85 to-transparent px-4 pb-3 pt-10">
         <span className="truncate text-xs font-semibold text-white/90">{alt}</span>
         <div className="flex shrink-0 gap-2">
@@ -407,7 +407,7 @@ function ReviewCard({ imageUrl, details, profile, onEdit }) {
     <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
       <div>
         {imageUrl ? (
-          <img src={imageUrl} alt="The item you found" className="h-56 w-full rounded-2xl object-cover shadow-soft lg:h-72" />
+          <img src={resolveUrl(imageUrl)} alt="The item you found" className="h-56 w-full rounded-2xl object-cover shadow-soft lg:h-72" />
         ) : (
           <div className="flex h-56 w-full items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-slate-300 lg:h-72">
             <PackagePlus className="h-10 w-10" />
@@ -898,7 +898,7 @@ export default function ReportFound() {
                   <div className="mb-4 flex items-center justify-between gap-3">
                     <h3 className="text-sm font-extrabold text-brand-ink">Detected item</h3>
                     {analysis?.imageUrl && (
-                      <img src={analysis.imageUrl} alt="Uploaded item" className="h-10 w-10 rounded-xl object-cover shadow-soft" />
+                      <img src={resolveUrl(analysis.imageUrl)} alt="Uploaded item" className="h-10 w-10 rounded-xl object-cover shadow-soft" />
                     )}
                   </div>
                   <AIProfileEditor

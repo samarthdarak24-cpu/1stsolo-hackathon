@@ -14,6 +14,7 @@ import Segmented from '../components/ui/Segmented';
 import { Button } from '../components/ui/Button';
 import { SkeletonGallery } from '../components/ui/Skeleton';
 import { useDiscovery } from '../lib/queries';
+import { resolveUrl } from '../lib/api';
 import { useOrganization } from '../context/OrganizationContext';
 import {
   formatDate, itemName, ITEM_CATEGORIES, SEARCH_SUGGESTIONS
@@ -405,7 +406,7 @@ function SearchDetail({ report, onClose, onOpen, onClaim }) {
 }
 
 function ItemImage({ report }) {
-  const src = (report.images || []).find(Boolean);
+  const src = resolveUrl((report.images || []).find(Boolean));
   const [failed, setFailed] = useState(false);
   if (!src || failed) {
     return (
