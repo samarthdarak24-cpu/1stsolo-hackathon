@@ -13,6 +13,14 @@ let driver = null;
 async function initStore() {
   const mode = config.dataMode;
 
+  if (mode === 'postgres' || mode === 'postgresql') {
+    if (!config.databaseUrl) throw new Error('DATA_MODE=postgres but DATABASE_URL is not set');
+    driver = require('./postgresDriver');
+    await driver.init(config.databaseUrl);
+    console.log('[store] PostgreSQL connected');
+    return driver;
+  }
+
   if (mode !== 'memory') {
     try {
       await mongoose.connect(config.mongoUri, { serverSelectionTimeoutMS: 2500 });

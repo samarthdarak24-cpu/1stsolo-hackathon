@@ -635,4 +635,9 @@ const memoryDriver = {
   }
 };
 
+memoryDriver._getState = state;
+memoryDriver._replaceState = (snapshot) => {
+  globalThis.__lostlinkMem = snapshot;
+};
+
 module.exports = memoryDriver;

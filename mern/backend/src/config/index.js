@@ -14,6 +14,7 @@ const config = {
   port: Number(process.env.PORT || 5000),
   clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
   mongoUri: process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/lostlink',
+  databaseUrl: process.env.DATABASE_URL || '',
   dataMode: (process.env.DATA_MODE || 'auto').toLowerCase(),
   jwt: {
     secret: process.env.JWT_SECRET || 'lostlink-dev-secret-change-me',

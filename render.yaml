@@ -11,8 +11,10 @@ services:
         value: production
       - key: PORT
         value: 5000
-      - key: MONGO_URI
-        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: samarthdb
+          property: connectionString
       - key: JWT_SECRET
         generateValue: true
       - key: JWT_EXPIRES_IN
@@ -20,11 +22,11 @@ services:
       - key: CLIENT_URL
         value: https://onestsolo-hackathon-1frontend.onrender.com
       - key: AI_SERVICE_URL
-        value: https://your-ai-service-domain.com
+        value: https://onestsolo-hackathon-ai-service.onrender.com
       - key: AI_ENABLED
         value: true
       - key: DATA_MODE
-        value: auto
+        value: postgres
       - key: MAIL_DRIVER
         value: off
 
