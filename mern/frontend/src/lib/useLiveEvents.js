@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { tokenStore } from './api';
+import { resolveUrl, tokenStore } from './api';
 
 /**
  * useLiveEvents — manages an EventSource SSE connection to /api/events.
@@ -36,7 +36,7 @@ export function useLiveEvents(orgId) {
       const resume = lastEventIdRef.current
         ? `&lastEventId=${encodeURIComponent(lastEventIdRef.current)}`
         : '';
-      const url = `/api/events?token=${encodeURIComponent(token)}${resume}`;
+      const url = resolveUrl(`/api/events?token=${encodeURIComponent(token)}${resume}`);
       const es = new EventSource(url);
       esRef.current = es;
 
