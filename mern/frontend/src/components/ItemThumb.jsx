@@ -12,6 +12,7 @@
 import { useState } from 'react';
 import { ImageOff, Package, PackageCheck } from 'lucide-react';
 import { itemImage, itemName } from '../lib/format';
+import { resolveUrl } from '../lib/api';
 import { cn } from '../lib/cn';
 
 const TONE = {
@@ -20,7 +21,7 @@ const TONE = {
 };
 
 export function ItemThumb({ report, className, rounded = 'rounded-xl', iconClass = 'h-8 w-8' }) {
-  const src = itemImage(report);
+  const src = resolveUrl(itemImage(report));
   const [failed, setFailed] = useState(false);
   const tone = TONE[report?.type] || TONE.FOUND;
   const Icon = tone.icon;

@@ -11,7 +11,7 @@ const API_BASE = (import.meta.env.VITE_API_URL || '')
   .replace(/\/+$/, '')
   .replace(/\/api$/, '');
 
-const resolveUrl = (path) => {
+export const resolveUrl = (path) => {
   if (!path) return path;
   if (/^https?:\/\//i.test(path)) return path;
   const base = API_BASE || '';
