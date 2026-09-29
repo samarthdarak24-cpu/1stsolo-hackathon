@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { ImagePlus, Loader2, X, Camera } from 'lucide-react';
 import { cn } from '../../lib/cn';
+import { resolveUrl } from '../../lib/api';
 
 /**
  * ImageDrop — the photo step of the report wizard.
@@ -124,7 +125,7 @@ export default function ImageDrop({
           >
             {value.map((photo, index) => (
               <div key={photo.url || photo.id || index} className="group relative overflow-hidden rounded-2xl bg-slate-100">
-                <img src={photo.url} alt={photo.name || 'Item photo'} className="aspect-square w-full object-cover" />
+                <img src={resolveUrl(photo.url)} alt={photo.name || 'Item photo'} className="aspect-square w-full object-cover" />
                 {showCoverBadge && index === 0 && (
                   <span className="absolute bottom-2 left-2 rounded-full bg-slate-900/75 px-2 py-0.5 text-[10px] font-bold text-white">
                     Cover
