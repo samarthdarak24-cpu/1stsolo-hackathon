@@ -46,4 +46,4 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        value: https://your-backend-domain.com/api
+        value: https://onestsolo-hackathon.onrender.com

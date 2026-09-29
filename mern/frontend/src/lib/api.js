@@ -7,7 +7,9 @@
  */
 const TOKEN_KEY = 'lostlink_token';
 const USER_KEY = 'lostlink_user';
-const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+const API_BASE = (import.meta.env.VITE_API_URL || '')
+  .replace(/\/+$/, '')
+  .replace(/\/api$/, '');
 
 const resolveUrl = (path) => {
   if (!path) return path;
