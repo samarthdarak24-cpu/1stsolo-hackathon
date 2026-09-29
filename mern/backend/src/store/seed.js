@@ -13,6 +13,7 @@ const matching = require('../services/matchingService');
 const verificationService = require('../services/verificationService');
 // eslint-disable-next-line global-require
 const notificationService = require('../services/notificationService');
+const { photoFor } = require('./itemPhotos');
 
 const FREE_DOMAINS = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'icloud.com', 'proton.me', 'protonmail.com', 'aol.com', 'mail.com', 'gmx.com', 'yandex.com', 'zoho.com', 'rediffmail.com'];
 
@@ -30,6 +31,17 @@ async function seed() {
   const store = getDriver();
   const orgs = await store.listOrgs();
   if (orgs.length > 0) {
+    for (const org of orgs) {
+      // Upgrade existing demo rows from drawn artwork to the curated photo set.
+      // This keeps a persistent Render database in sync without resetting user data.
+      const { reports } = await store.listReports(org.id, { limit: 500 });
+      for (const report of reports) {
+        const photos = photoFor(report.itemProfile?.itemName);
+        if (photos && report.images?.[0] !== photos[0]) {
+          await store.updateReport(report.id, { images: photos });
+        }
+      }
+    }
     // eslint-disable-next-line no-console
     console.log('[seed] organizations already present — skipping seed');
     return;
@@ -73,6 +85,47 @@ async function seed() {
   const studentAbc = await mkUser('Samarth Patil', 'student@abcschool.com', 'member', abc.id);
   const staffAbc = await mkUser('Grace Fernandes', 'staff@abcschool.com', 'staff', abc.id);
   const securityAbc = await mkUser('Rohan Kulkarni', 'security@abcschool.com', 'security', abc.id);
+
+  // Populate the ABC School roster with 100 realistic members to make the
+  // People, directory, admin dashboards and org insights screens feel real on
+  // first login without relying on any hidden mock data.
+  const abcSeedNames = [
+    'Aarav', 'Aisha', 'Ananya', 'Arjun', 'Diya', 'Esha', 'Ishaan', 'Kabir', 'Kavya', 'Meher',
+    'Naira', 'Nikhil', 'Prisha', 'Raghav', 'Riya', 'Sai', 'Sana', 'Tanvi', 'Vihaan', 'Yash',
+    'Zoya', 'Aditya', 'Bhavya', 'Chetan', 'Dev', 'Harsh', 'Ira', 'Jai', 'Kriti', 'Lavanya',
+    'Mihir', 'Neha', 'Om', 'Pari', 'Qasim', 'Reyansh', 'Sakshi', 'Tushar', 'Uma', 'Veda',
+    'Wahab', 'Xena', 'Yuvraj', 'Zain', 'Aditi', 'Bharat', 'Chaitra', 'Dhanush', 'Eklavya', 'Farah',
+    'Gaurav', 'Hina', 'Jhanvi', 'Karan', 'Leah', 'Mira', 'Naman', 'Ojas', 'Pooja', 'Rohan',
+    'Siddharth', 'Tara', 'Udit', 'Vansh', 'Warda', 'Yamini', 'Zenia', 'Aman', 'Bina', 'Chinmay',
+    'Disha', 'Evan', 'Faisal', 'Gita', 'Harini', 'Ishita', 'Jugal', 'Krisha', 'Lalit', 'Mansi',
+    'Nandini', 'Omkar', 'Pankaj', 'Ritika', 'Saurabh', 'Tanya', 'Urvashi', 'Vikram', 'Wasim', 'Yashvi',
+    'Zafar', 'Aanya', 'Brijesh', 'Cynthia', 'Dhruv', 'Esha', 'Feroz', 'Gayatri', 'Himanshu', 'Jiya'
+  ];
+  const abcSeedSurnames = [
+    'Patel', 'Sharma', 'Reddy', 'Iyer', 'Nair', 'Singh', 'Kapoor', 'Mehta', 'Desai', 'Khan',
+    'Joshi', 'Menon', 'Verma', 'Saxena', 'Gupta', 'Nandan', 'Bose', 'Kulkarni', 'Chopra', 'Sen',
+    'Roy', 'Malhotra', 'Mishra', 'Pillai', 'Arora', 'Bhatia', 'Das', 'Dutta', 'Khanna', 'Jain',
+    'Banerjee', 'Yadav', 'Rao', 'Fernandes', 'Tomar', 'Agarwal', 'Sethi', 'Rastogi', 'Bhatt', 'Madan',
+    'Kamble', 'Dhingra', 'Sodhi', 'Gokhale', 'Davids', 'Shaikh', 'Wagle', 'Sinha', 'Purohit', 'Vora'
+  ];
+
+  const seedAbcOrganizationMembers = async (orgId, total = 100) => {
+    for (let i = 1; i <= total; i += 1) {
+      const firstName = abcSeedNames[(i - 1) % abcSeedNames.length];
+      const lastName = abcSeedSurnames[(i * 3) % abcSeedSurnames.length];
+      const role = i <= 4 ? 'owner' : i <= 16 ? 'staff' : i <= 32 ? 'security' : 'member';
+      const email = `abcmember${String(i).padStart(3, '0')}@abcschool.com`;
+      const user = await store.createUser({
+        name: `${firstName} ${lastName}`,
+        email,
+        password: 'lostlink123'
+      });
+      await store.addMembership(user.id, orgId, role);
+      await store.updateUser(user.id, { isVerified: true, activeOrgId: orgId });
+    }
+  };
+  await seedAbcOrganizationMembers(abc.id, 100);
+
   const employeeXyz = await mkUser('Maya Chen', 'employee@xyzcompany.com', 'member', xyz.id);
   const adminXyz = await mkUser('Ravi Iyer', 'admin@xyzcompany.com', 'owner', xyz.id);
 
@@ -108,7 +161,12 @@ async function seed() {
   // app already serves that directory read-only at /uploads. Keeping the list
   // here (rather than importing the generator) means seeding does not depend on
   // the script having been run, and the URLs stay stable in git.
-  const art = (slug) => [`/uploads/items/${slug}.svg`];
+  const art = (slug) => {
+    const photoSlug = ['black-handbag', 'blue-tablet', 'silver-watch', 'black-headphones',
+      'black-sunglasses', 'teal-water-bottle', 'navy-track-pants', 'silver-laptop-stand',
+      'grey-wireless-mouse', 'student-id-card'].includes(slug) ? slug : null;
+    return [photoSlug ? `/uploads/items/photo/${photoSlug}.jpg` : `/uploads/items/${slug}.svg`];
+  };
 
   // Item name -> artwork file. Kept as an explicit map rather than a
   // slugify-the-name rule, because the drawn filenames are our choice and a
@@ -183,6 +241,34 @@ async function seed() {
     itemProfile: profile({ itemName: 'Black Backpack', category: 'Backpack', primaryColor: 'Black', secondaryColor: 'Blue', brand: 'Wildcraft', visibleMark: 'White mountain logo on the front', finderNotes: 'Books and a water bottle inside the main compartment' }),
     images: art('black-backpack'), description: 'Found a black Wildcraft backpack with a white mountain logo on the front and a blue zip pull near the library returns desk. It still had books and a water bottle inside.',
     category: 'Backpack', location: 'Central Library, Returns Desk', foundAt: daysAgo(0.4), status: 'MATCHED'
+  });
+
+  const lostAdminLaptop = await store.createReport({
+    organizationId: abc.id, userId: adminAbc.id, type: 'LOST',
+    itemProfile: profile({ itemName: 'Laptop Sleeve', category: 'Laptop', primaryColor: 'Navy', material: 'Neoprene', shape: 'Rectangular', visibleMark: 'No branding, orange zipper pull' }),
+    images: art('navy-laptop-sleeve'), description: 'My navy neoprene laptop sleeve with an orange zipper pull was left on my desk in the principal office during the parent meeting. It held a 14-inch laptop and charger.',
+    category: 'Laptop', location: 'Administration Office, Desk 2', lostAt: daysAgo(1.2), status: 'VERIFICATION_PENDING'
+  });
+
+  const foundAdminLaptop = await store.createReport({
+    organizationId: abc.id, userId: securityAbc.id, type: 'FOUND',
+    itemProfile: profile({ itemName: 'Laptop Sleeve', category: 'Laptop', primaryColor: 'Navy', material: 'Neoprene', shape: 'Rectangular', visibleMark: 'Orange zipper pull' }),
+    images: art('navy-laptop-sleeve'), description: 'Found a navy neoprene laptop sleeve with an orange zipper pull on the admin office desk after a parent meeting. It had a laptop and charger inside.',
+    category: 'Laptop', location: 'Administration Office, Desk 2', foundAt: daysAgo(0.9), status: 'MATCHED'
+  });
+
+  const lostAdminBadge = await store.createReport({
+    organizationId: abc.id, userId: adminAbc.id, type: 'LOST',
+    itemProfile: profile({ itemName: 'Access Badge', category: 'Electronics', primaryColor: 'White', material: 'Plastic', shape: 'Small', visibleMark: 'Photo of the school crest on the front' }),
+    images: art('access-badge'), description: 'I lost my white school access badge with the ABC crest on the front near the staff entrance by the security cabin.',
+    category: 'Electronics', location: 'Staff Entrance, Gate 1', lostAt: daysAgo(3.1), status: 'POTENTIAL_MATCH'
+  });
+
+  const foundAdminBadge = await store.createReport({
+    organizationId: abc.id, userId: staffAbc.id, type: 'FOUND',
+    itemProfile: profile({ itemName: 'Access Badge', category: 'Electronics', primaryColor: 'White', material: 'Plastic', shape: 'Small', visibleMark: 'School crest on the front' }),
+    images: art('access-badge'), description: 'Found a white school access badge with the ABC crest on the front near the staff entrance security cabin.',
+    category: 'Electronics', location: 'Staff Entrance, Gate 1', foundAt: daysAgo(2.8), status: 'MATCHED'
   });
 
   const lostFlask = await store.createReport({
@@ -696,6 +782,8 @@ async function seed() {
   };
 
   const matchBackpack = await mkMatch(lostBackpack, foundBackpack);
+  const matchAdminLaptop = await mkMatch(lostAdminLaptop, foundAdminLaptop);
+  const matchAdminBadge = await mkMatch(lostAdminBadge, foundAdminBadge);
   const matchFlask = await mkMatch(lostFlask, foundFlask);
   const matchUmbrella = await mkMatch(lostUmbrella, foundUmbrella);
   const matchKeyboardTech = await mkMatch(lostLaptopTech, foundLaptopTech);
@@ -1108,6 +1196,12 @@ async function seed() {
     title: 'Potential match found',
     message: `Your ${lostBackpack.itemProfile.itemName} may match an item found at ${foundBackpack.location}.`,
     referenceId: matchBackpack.id, referenceType: 'MATCH', meta: { finalScore: matchBackpack.finalScore }
+  });
+  await notificationService.notify(adminAbc.id, abc.id, {
+    type: notificationService.TYPE.NEW_MATCH,
+    title: 'Match found for your item',
+    message: `Your ${lostAdminLaptop.itemProfile.itemName} may match an item found in the administration office.`,
+    referenceId: matchAdminLaptop.id, referenceType: 'MATCH', meta: { finalScore: matchAdminLaptop.finalScore }
   });
   await notificationService.notify(studentAbc.id, abc.id, {
     type: notificationService.TYPE.VERIFICATION_REQUIRED,
