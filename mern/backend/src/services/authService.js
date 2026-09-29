@@ -76,14 +76,14 @@ async function register({ name, email, password, organizationName, organizationT
   const store = getDriver();
   const existing = await store.findUserByEmail(email);
   if (existing) throw AppError.conflict('An account with this email already exists');
+  const invitedOrg = inviteCode ? await store.findOrgByInviteCode(inviteCode) : null;
+  if (inviteCode && !invitedOrg) throw AppError.badRequest('That invite code is not valid');
 
   const user = await store.createUser({ name, email, password });
 
   // Optional: attach to an existing org (invite code) or create a new one.
   if (inviteCode) {
-    const org = await store.findOrgByInviteCode(inviteCode);
-    if (!org) throw AppError.badRequest('That invite code is not valid');
-    await store.addMembership(user.id, org.id, 'member');
+    await store.addMembership(user.id, invitedOrg.id, 'member');
   } else if (organizationName && organizationType) {
     const org = await store.createOrg({ name: organizationName, type: organizationType, emailDomain: extractDomain(email), ownerId: user.id });
     await store.addMembership(user.id, org.id, 'owner');
