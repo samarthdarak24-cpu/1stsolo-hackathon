@@ -13,6 +13,7 @@ const matching = require('../services/matchingService');
 const verificationService = require('../services/verificationService');
 // eslint-disable-next-line global-require
 const notificationService = require('../services/notificationService');
+const { generateEmbeddings } = require('../services/reportService');
 const { photoFor } = require('./itemPhotos');
 
 const FREE_DOMAINS = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'icloud.com', 'proton.me', 'protonmail.com', 'aol.com', 'mail.com', 'gmx.com', 'yandex.com', 'zoho.com', 'rediffmail.com'];
