@@ -122,9 +122,15 @@ function readImageBytes(imageUrl) {
   // path.basename() here turned /uploads/items/x.svg into uploads/x.svg, so
   // every seeded artwork silently failed to embed. Only the leading /uploads
   // prefix is stripped, and the resolved path must stay inside UPLOAD_DIR.
-  const relative = decodeURIComponent(imageUrl).replace(/^\/uploads\//, '').replace(/^uploads\//, '');
+  let relative;
+  try {
+    relative = decodeURIComponent(imageUrl).replace(/^\/uploads\//, '').replace(/^uploads\//, '');
+  } catch {
+    return null;
+  }
   const full = path.resolve(UPLOAD_DIR, relative);
-  if (!full.startsWith(UPLOAD_DIR)) return null;
+  const uploadRoot = `${path.resolve(UPLOAD_DIR)}${path.sep}`;
+  if (!full.startsWith(uploadRoot)) return null;
   try {
     return fs.readFileSync(full);
   } catch {

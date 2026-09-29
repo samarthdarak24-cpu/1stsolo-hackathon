@@ -37,8 +37,17 @@ async function seed() {
       const { reports } = await store.listReports(org.id, { limit: 500 });
       for (const report of reports) {
         const photos = photoFor(report.itemProfile?.itemName);
-        if (photos && report.images?.[0] !== photos[0]) {
-          await store.updateReport(report.id, { images: photos });
+        const isSeedArtwork = /^\/uploads\/items\/[^/]+\.svg$/i.test(report.images?.[0] || '');
+        if (photos && isSeedArtwork && report.images[0] !== photos[0]) {
+          const updated = await store.updateReport(report.id, {
+            images: photos,
+            embedding: [],
+            embeddingSources: {},
+            embeddingUpdatedAt: null
+          });
+          generateEmbeddings(updated).catch((err) => {
+            console.warn(`[embeddings] could not refresh ${updated.reference}: ${err.message}`);
+          });
         }
       }
     }
